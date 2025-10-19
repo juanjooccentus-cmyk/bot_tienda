@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: entre-precios-bot
+    env: python
+    rootDir: bot
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 -k gthread -t 60 -b 0.0.0.0:$PORT app:app
+    plan: free
+    envVars:
+      - key: WABA_VERIFY_TOKEN
+        sync: false
+      - key: WABA_TOKEN
+        sync: false
+      - key: WABA_PHONE_ID
+        sync: false
+      - key: CSE_ENDPOINT
+        value: https://www.entrealmohadones.es/buscador-cse/cse.php
+      - key: WABA_APP_SECRET
+        sync: false
